@@ -1,0 +1,713 @@
+{
+  "version": "0.1.0",
+  "name": "solana_nft_collaterized_loans",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "configuration",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "feeCoinVault",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "configNonce",
+          "type": "u8"
+        },
+        {
+          "name": "stableNonce",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "updateConfig",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "configuration",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "feeCoinVault",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "configNonce",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "createOrder",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "feeCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userStableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "nftVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userNftVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "order",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "borrower",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "stableNonce",
+          "type": "u8"
+        },
+        {
+          "name": "nftNonce",
+          "type": "u8"
+        },
+        {
+          "name": "orderNonce",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "cancelOrder",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "order",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userStableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "nftVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userNftVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "borrower",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "orderId",
+          "type": "u64"
+        },
+        {
+          "name": "stableNonce",
+          "type": "u8"
+        },
+        {
+          "name": "nftNonce",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "giveLoan",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "order",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "feeCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lenderStableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "borrowerStableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lender",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "orderId",
+          "type": "u64"
+        },
+        {
+          "name": "stableNonce",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "payback",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "order",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lenderStableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "borrowerStableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "nftVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "borrowerNftVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "borrower",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "orderId",
+          "type": "u64"
+        },
+        {
+          "name": "stableNonce",
+          "type": "u8"
+        },
+        {
+          "name": "nftNonce",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "liquidate",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "order",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lenderStableCoinVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "nftVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lenderNftVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "borrower",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lender",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "orderId",
+          "type": "u64"
+        },
+        {
+          "name": "stableNonce",
+          "type": "u8"
+        },
+        {
+          "name": "nftNonce",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Configuration",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "stableCoinMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "stableCoinVault",
+            "type": "publicKey"
+          },
+          {
+            "name": "feeCoinVault",
+            "type": "publicKey"
+          },
+          {
+            "name": "orderId",
+            "type": "u64"
+          },
+          {
+            "name": "totalAdditionalCollateral",
+            "type": "u64"
+          },
+          {
+            "name": "nonce",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Order",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "borrower",
+            "type": "publicKey"
+          },
+          {
+            "name": "stableCoinVault",
+            "type": "publicKey"
+          },
+          {
+            "name": "nftMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "nftVault",
+            "type": "publicKey"
+          },
+          {
+            "name": "requestAmount",
+            "type": "u64"
+          },
+          {
+            "name": "interest",
+            "type": "u64"
+          },
+          {
+            "name": "paybackAmount",
+            "type": "u64"
+          },
+          {
+            "name": "feeAmount",
+            "type": "u64"
+          },
+          {
+            "name": "period",
+            "type": "u64"
+          },
+          {
+            "name": "additionalCollateral",
+            "type": "u64"
+          },
+          {
+            "name": "lender",
+            "type": "publicKey"
+          },
+          {
+            "name": "createdAt",
+            "type": "u64"
+          },
+          {
+            "name": "loanStartTime",
+            "type": "u64"
+          },
+          {
+            "name": "paidBackAt",
+            "type": "u64"
+          },
+          {
+            "name": "withdrewAt",
+            "type": "u64"
+          },
+          {
+            "name": "orderStatus",
+            "type": "bool"
+          },
+          {
+            "name": "orderId",
+            "type": "u64"
+          },
+          {
+            "name": "nonce",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "CreatedOrderEvent",
+      "fields": [
+        {
+          "name": "orderKey",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "borrower",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "CanceledOrderEvent",
+      "fields": [
+        {
+          "name": "orderKey",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "borrower",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "LoanOrderEvent",
+      "fields": [
+        {
+          "name": "orderKey",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "borrower",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "lender",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "PayBackOrderEvent",
+      "fields": [
+        {
+          "name": "orderKey",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "borrower",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "LiquidityOrderEvent",
+      "fields": [
+        {
+          "name": "orderKey",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "borrower",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "lender",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "LoanAlreadyStarted",
+      "msg": "Loan has started or already been canceled"
+    },
+    {
+      "code": 6001,
+      "name": "LoanNotProvided",
+      "msg": "Loan not provided yet"
+    },
+    {
+      "code": 6002,
+      "name": "RepaymentPeriodExceeded",
+      "msg": "Repayment Period has been exceeded"
+    },
+    {
+      "code": 6003,
+      "name": "RepaymentPeriodNotExceeded",
+      "msg": "Repayment Period has not been exceeded"
+    },
+    {
+      "code": 6004,
+      "name": "AlreadyLiquidated",
+      "msg": "Already liquidated"
+    },
+    {
+      "code": 6005,
+      "name": "PermissionError",
+      "msg": "Invalid action, E5000"
+    }
+  ],
+  "metadata": {
+    "address": "32XNkUwWhSKsoUEY9dvApXWgMjtssVc9fD1aR1mBfQpe"
+  }
+}
